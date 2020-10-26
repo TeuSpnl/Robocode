@@ -1,12 +1,13 @@
 package MsSpnl;
 import robocode.*;
+import java.awt.Color;
 
-//import java.awt.Color;
 
 // API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
 
 /**
- * TurnShot - a robot by (your name here)
+ * TurnShot - a robot by Mateus Spínola
+ * @author Mateus Spínola
  */
 public class TurnShot extends Robot
 {
@@ -15,23 +16,13 @@ public class TurnShot extends Robot
 	 */
 	public void run() {
 		// Initialization of the robot should be put here
-
-		// After trying out your robot, try uncommenting the import at the top,
-		// and the next line:
-
-		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
+		initialize();
 
 		// Robot main loop
 		while(true) {
-			// Replace the next 4 lines with any behavior you would like
-			ahead(50);
-			turnRight(30);
-			final int i = 0;
-			i = i + 1;
-		
-			if (i < 1) {
-				turnGunRight(360);
-			}
+			ahead(100);
+			turnRight(50);
+			turnGunRight(360);
 		}
 	}
 
@@ -64,7 +55,20 @@ public class TurnShot extends Robot
 	public void onHitWall(HitWallEvent e) {
 		// Replace the next line with any behavior you would like
 		back(300);
+		turnGunLeft(360);
 		turnLeft(30);
 		ahead(50);
 	}	
+	
+	private void initialize() {
+		// Body moves, gun and radar don't
+		setAdjustGunForRobotTurn(true);
+		
+		//Set Robot Colors
+		setBodyColor(new Color(0xC0,	0xC0, 0xC0)); // Silver
+		setGunColor(new Color(0x99,	0xCC, 0xFF)); // Light Blue
+		setRadarColor(new Color(0xCC, 0xFF, 0xFF)); // Lighter Blue + a Little of Green
+		setBulletColor(new Color(0xFF, 0x00, 0xFF)); // Fuchsia
+		setScanColor(new Color(0xCC, 0xFF, 0xFF)); // It's the Same of the Radar color
+	}
 }
