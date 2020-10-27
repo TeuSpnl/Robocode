@@ -20,8 +20,8 @@ public class TurnShot extends Robot
 
 		// Robot main loop
 		while(true) {
-			ahead(100);
-			turnRight(50);
+			ahead(30);
+			turnRight(30);
 			turnGunRight(360);
 		}
 	}
