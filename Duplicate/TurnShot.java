@@ -81,20 +81,67 @@ public class TurnShot extends Robot
 		double YPos = getY(); // Position Y of the robot
 		double FWidth = getBattleFieldWidth(); // Width of the Field
 		double FHeight = getBattleFieldHeight(); // Height of the field
+		double Head = getHeading(); // Get the direction that the robot's body is facing
 
-		double BordX = FWidth - XPos; // Distance Robot to Border Right
-		double BordY = FHeight - YPos; // Distance Robot to border UP
+		double BordR = FWidth - XPos; // Distance Robot to Border Right
+		double BordT = FHeight - YPos; // Distance Robot to border top
+		
+		// Erase all this "out.Print's" if you see it, pls.
 		out.println(XPos);
 		out.println(YPos);
 		out.println(FWidth);
 		out.println(FHeight);
-		out.println(BordX);
-		out.println(BordY);
+		out.println(BordR);
+		out.println(BordT);
+		out.println(Head);
 		
 		// Conditions to move
-		if (BordX > FWidth/2 && BordX < BordY) {
+		if (BordR > FWidth/2 && BordR < BordT) { // When TurnShot's closer to the Right side
+			if (Head > 270) {
+				turnRight((360 - Head) + 90);
+			}
+			else if (Head <= 90) {
+				turnRight(90 - Head);
+			}
+			else {
+				turnLeft(Head - 90);
+			}
 			
+			ahead(BordR - 50);
 		}
-		else if (
+		
+		else if (BordT > FHeight/2 && BordT < BordR) { // When TurnShot's closer to the top
+			if (Head > 180) {
+				turnRight(360 - Head);
+			}
+			else {
+				turnLeft(Head);
+			}
+			
+			ahead(BordT - 50);
+		}
+		else if (XPos > YPos){ // When TurnShot's closer to the bottom
+			if (Head > 270) {
+				turnRight((360 - Head) + 90);
+			}
+			else if (Head <= 90) {
+				turnRight(90 - Head);
+			}
+			else {
+				turnLeft(Head - 90);
+			}
+			
+			ahead(XPos - 50);
+		}
+		else {
+			if (Head > 180) {
+				turnRight(360 - Head);
+			}
+			else {
+				turnLeft(Head);
+			}
+			
+			ahead(BordT - 50)
+		}
 	}
 }
